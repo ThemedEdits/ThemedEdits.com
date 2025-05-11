@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="my logo-01 copy.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Themed Edits | Services</title>
+    <style>
+        :root {
+            --primary-color: #7b9aff;
+            /* lighter shade of your original primary to pop on dark bg */
+            --primary-dark: #5c78e0;
+            /* softer dark primary */
+            --secondary-color: #6372f7;
+            /* slightly lighter secondary for contrast */
+            --text-color: #e0e0e0;
+            /* light text for readability */
+            --text-light: #b0b3c5;
+            /* softer secondary text */
+            --background-color: #1a1c2c;
+            /* deep dark background */
+            --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            /* subtle light shadow for dark bg */
+            --hover-shadow: 0 6px 12px rgba(123, 154, 255, 0.3);
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.8s ease;
+        }
+
+        /* When revealed */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1s ease;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(123, 154, 255, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .progress-circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /* Added */
+            align-items: center;
+            /* Added */
+            justify-content: center;
+            /* Added */
+        }
+
+        .progress-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-circle {
+            stroke: var(--text-color);
+            stroke-dasharray: 138;
+            stroke-dashoffset: 138;
+            transition: stroke-dashoffset 0.3s;
+        }
+
+        .back-to-top i {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .progress-ring {
+                width: 45px;
+                height: 45px;
+            }
+
+            .progress-ring-circle {
+                r: 20;
+                cx: 22.5;
+                cy: 22.5;
+                stroke-width: 2.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .progress-ring {
+                width: 40px;
+                height: 40px;
+            }
+
+            .progress-ring-circle {
+                r: 18;
+                cx: 20;
+                cy: 20;
+            }
+
+            .back-to-top i {
+                font-size: 1rem;
+            }
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+        }
+
+
+        /* Home Button Styles */
+        .home-btn-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .home-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+            background: var(--background-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+        }
+
+        .home-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease, transform-origin 0s;
+        }
+
+        .home-btn:hover {
+            color: var(--primary-dark);
+        }
+
+        .home-btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: right;
+        }
+
+        /* Reverse animation when not hovering */
+        .home-btn::after {
+            transition: transform 0.4s ease, transform-origin 0s 0.4s;
+        }
+
+        .home-btn:not(:hover)::after {
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .home-btn i {
+            transition: var(--transition);
+        }
+
+        .home-btn:hover i {
+            transform: translateX(-10px);
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 768px) {
+            .home-btn-container {
+                top: 15px;
+                left: 15px;
+            }
+
+            .home-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        #pricing-section {
+            padding: 6rem 2rem;
+        }
+
+        /* Pricing Section Styles */
+        .pricing-section {
+            padding: 4rem 0;
+            /* background: rgba(0, 0, 0, 0.2); */
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title i {
+            margin-right: 0.8rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-category {
+            margin: 4rem 0;
+        }
+
+        .pricing-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-card:hover {
+            box-shadow: var(--hover-shadow);
+            transform: translateY(-3px);
+        }
+
+        .pricing-card.popular {
+            border: 1px solid var(--primary-color);
+        }
+
+        .pricing-header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .pricing-header h4 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        hr {
+            margin-top: 1.3rem;
+            border: 1px solid #7b9aff70;
+        }
+
+        .features {
+            margin: 2rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .features i {
+            color: var(--primary-color);
+            margin-top: 0.2rem;
+        }
+
+        .not-included {
+            text-decoration: line-through;
+            color: #aaa;
+            opacity: 0.6;
+        }
+
+        .pricing-btn a {
+            text-decoration: none;
+            color: var(--background-color);
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pricing-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--background-color);
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #pricing-section {
+                padding: 6rem 1.9rem;
+            }
+
+            .pricing-card {
+                padding: 1.5rem;
+            }
+
+            .price {
+                font-size: 2rem;
+            }
+        }
+
+        /* Custom Plan Builder Styles */
+        .custom-plan-section {
+            padding: 5rem 0;
+            background: var(--background-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .plan-builder-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: var(--transition)
+        }
+
+        .glass-card:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .plan-category-selector {
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .selector-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .selector-header i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .selector-header h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+        }
+
+        .custom-select {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .custom-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(123, 154, 255, 0.3);
+        }
+
+        .custom-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-group {
+            composes: glass-card;
+            padding: 1.5rem;
+        }
+
+        .option-group h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .option-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .option-item:last-child {
+            border-bottom: none;
+        }
+
+        .option-item label {
+            color: var(--text-light);
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .option-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option-control input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .option-control input[type="radio"]:checked {
+            background: var(--primary-color);
+            box-shadow: 0 0 0 1px var(--background-color), 0 0 0 2px var(--primary-color);
+        }
+
+        .option-control input[type="number"] {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 5px;
+            width: 60px;
+            text-align: center;
+        }
+
+        /* Custom Plan Card */
+        .custom-plan-card {
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card-ribbon {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--primary-color);
+            color: var(--background-color);
+            padding: 0.3rem 3rem;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .custom-plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .custom-plan-header h3 {
+            color: var(--text-color);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .custom-plan-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: rgba(123, 154, 255, 0.1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--primary-color) 50%, transparent 100%);
+            margin: 1.5rem 0;
+            opacity: 0.3;
+        }
+
+        .custom-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .custom-features-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-light);
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .custom-features-list li:hover {
+            background: rgba(123, 154, 255, 0.05);
+        }
+
+        .custom-features-list i {
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .custom-plan-btn {
+            width: 40%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .custom-plan-btn:hover {
+            background: var(--primary-dark);
+            /* transform: translateY(-3px); */
+        }
+
+        .pulse-on-hover:hover {
+            animation: pulse 1s infinite;
+        }
+
+        /* Custom Checkbox Styles */
+        .option-control input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .option-control input[type="checkbox"]:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(123, 154, 255, 0.2);
+        }
+
+        .option-control input[type="checkbox"]:checked {
+            background-color: var(--primary-color);
+            animation: checkPop 0.4s ease;
+        }
+
+        .option-control input[type="checkbox"]:checked::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 12px;
+            border: solid var(--background-color);
+            border-width: 0 2px 2px 0;
+            transform: translate(-50%, -60%) rotate(45deg);
+        }
+
+        @keyframes checkPop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* For radio buttons (if needed) */
+        .option-control input[type="radio"]:checked {
+            animation: radioPop 0.4s ease;
+        }
+
+        @keyframes radioPop {
+            0% {
+                transform: scale(1);
+                box-shadow: none;
+            }
+
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 0 4px rgba(123, 154, 255, 0.3);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: none;
+            }
+        }
+
+        /* Enhanced Checkbox with Ripple */
+        .option-control {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-control input[type="checkbox"] {
+            position: relative;
+            z-index: 1;
+        }
+
+        .option-control input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background: rgba(123, 154, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+            animation: ripple 0.6s ease-out;
+            z-index: 0;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(123, 154, 255, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 12px rgba(123, 154, 255, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(123, 154, 255, 0);
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .custom-options-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .custom-options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .custom-plan-btn {
+                width: 100%;
+            }
+
+            #custom-plan-section {
+                padding: 6rem 1.4rem;
+            }
+
+            .custom-plan-card {
+                padding: 1.5rem;
+            }
+
+            .custom-plan-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="home-btn-container">
+        <a href="../index.html" class="home-btn">
+            <i class="fas fa-arrow-left"></i> Return to Home
+        </a>
+
+    </div>
+
+    <!-- back to top button is here -->
+    <div class="back-to-top" id="backToTop">
+        <div class="progress-circle">
+            <svg class="progress-ring" width="50" height="50">
+                <circle class="progress-ring-circle" stroke-width="3" fill="transparent" r="22" cx="25" cy="25" />
+            </svg>
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </div>
+
+    <section id="pricing-section" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-tags"></i> Our Pricing</h2>
+            <p class="section-subtitle">Choose the perfect plan for your needs</p>
+            <hr>
+
+            <!-- Logo Design Category -->
+            <div class="pricing-category">
+                <h3><i class="fas fa-palette"></i> Logo Design</h3>
+                <div class="pricing-grid">
+                    <!-- Basic Plan -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h4>Basic</h4>
+                            <div class="price">$5</div>
+                            <p>Best for personal use</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 1 Logo Concept</li>
+                            <li><i class="fas fa-check-circle"></i> 2 Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> 48hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> PNG & JPEG Files</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Logo Design" data-plan="Basic">Get Started</button>
+                    </div>
+
+                    <!-- standard Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Standard</h4>
+                            <div class="price">$10</div>
+                            <p>For Business</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 1 Logo Concept</li>
+                            <li><i class="fas fa-check-circle"></i> 3 Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> 36hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> PNG, PDF & JPEG Files</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Logo Design" data-plan="Standard">Get
+                            Started</button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Premium</h4>
+                            <div class="price">$15</div>
+                            <p>Best for under-developing companies</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 2 Logo Concepts</li>
+                            <li><i class="fas fa-check-circle"></i> 5 Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> 24hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> PDF, AI, PS, PNG & JPEG Files</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Logo Design" data-plan="Gold">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Identity Category -->
+            <div class="pricing-category">
+                <h3><i class="fas fa-vector-square"></i> Brand Identity</h3>
+                <div class="pricing-grid">
+                    <!-- Basic Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Basic</h4>
+                            <div class="price">$15</div>
+                            <p>Perfect for startups</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 3 Logo Concepts</li>
+                            <li><i class="fas fa-check-circle"></i> Unlimited Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> Priority 24hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> All File Formats (AI, EPS, SVG, PNG, JPEG)</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Mockup Presentation</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Full Brand Color Palette</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Font Suggestions</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Brand Guidelines PDF</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Business card design</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Letterhead design</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Brand Identity" data-plan="Basic">Get
+                            Started</button>
+                    </div>
+
+                    <!-- Standard Plan -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h4>Standard</h4>
+                            <div class="price">$20</div>
+                            <p>Great for small businesses</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 3 Logo Concepts</li>
+                            <li><i class="fas fa-check-circle"></i> Unlimited Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> Priority 24hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> All File Formats (AI, EPS, SVG, PNG, JPEG)</li>
+                            <li><i class="fas fa-check-circle"></i> Mockup Presentation</li>
+                            <li><i class="fas fa-check-circle"></i> Full Brand Color Palette</li>
+                            <li><i class="fas fa-check-circle"></i> Font Suggestions</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Brand Guidelines PDF</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Business card design</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Letterhead design</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Brand Identity" data-plan="Standard">Get
+                            Started</button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Premium</h4>
+                            <div class="price">$25</div>
+                            <p>Best for full branding</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 3 Logo Concepts</li>
+                            <li><i class="fas fa-check-circle"></i> Unlimited Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> Priority 24hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> All File Formats (AI, EPS, SVG, PNG, JPEG)</li>
+                            <li><i class="fas fa-check-circle"></i> Mockup Presentation</li>
+                            <li><i class="fas fa-check-circle"></i> Full Brand Color Palette</li>
+                            <li><i class="fas fa-check-circle"></i> Font Suggestions</li>
+                            <li><i class="fas fa-check-circle"></i> Brand Guidelines PDF</li>
+                            <li><i class="fas fa-check-circle"></i> Business card design</li>
+                            <li><i class="fas fa-check-circle"></i> Letterhead design</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Brand Identity" data-plan="Premium">Get
+                            Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posters / Social Media Post Design Category -->
+            <div class="pricing-category">
+                <h3><i class="fas fa-images"></i> Posters / SM Design</h3>
+                <div class="pricing-grid">
+
+                    <!-- Basic Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Basic</h4>
+                            <div class="price">$3</div>
+                            <p>Great for quick needs</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 1 Design</li>
+                            <li><i class="fas fa-check-circle"></i> 1 Revision</li>
+                            <li><i class="fas fa-check-circle"></i> 24hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> JPEG/PNG Format</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Source File (PSD/AI)</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Custom Sizes & Platform Optimization</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Posters" data-plan="Basic">Get Started</button>
+                    </div>
+
+                    <!-- Standard Plan -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h4>Standard</h4>
+                            <div class="price">$6</div>
+                            <p>Ideal for small campaigns</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 2 Designs</li>
+                            <li><i class="fas fa-check-circle"></i> 3 Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> 36hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> JPEG/PNG Format</li>
+                            <li><i class="fas fa-check-circle"></i> Source File (PSD/AI)</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Custom Sizes & Platform
+                                Optimization</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Posters" data-plan="Standard">Get Started</button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Premium</h4>
+                            <div class="price">$10</div>
+                            <p>Perfect for serious branding</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 3 Designs</li>
+                            <li><i class="fas fa-check-circle"></i> Unlimited Revisions</li>
+                            <li><i class="fas fa-check-circle"></i> Priority 24hr Delivery</li>
+                            <li><i class="fas fa-check-circle"></i> JPEG, PNG, PDF Format</li>
+                            <li><i class="fas fa-check-circle"></i> Source File (PSD/AI)</li>
+                            <li><i class="fas fa-check-circle"></i> Custom Sizes & Platform Optimization</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Posters" data-plan="Premium">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website Design Category -->
+            <div class="pricing-category">
+                <h3><i class="fas fa-globe"></i> Website Design</h3>
+                <div class="pricing-grid">
+
+                    <!-- Basic Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Basic</h4>
+                            <div class="price">$35</div>
+                            <p>Best for personal projects</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> 1 Page Design</li>
+                            <li><i class="fas fa-check-circle"></i> Responsive Layout</li>
+                            <li><i class="fas fa-check-circle"></i> HTML/CSS Only</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> JavaScript Interactions</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Contact Form</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> SEO Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Delivery in 3 Days</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Website Design" data-plan="Basic">Get
+                            Started</button>
+                    </div>
+
+                    <!-- Standard Plan -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h4>Standard</h4>
+                            <div class="price">$60</div>
+                            <p>Perfect for small businesses</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> Up to 3 Pages</li>
+                            <li><i class="fas fa-check-circle"></i> Fully Responsive</li>
+                            <li><i class="fas fa-check-circle"></i> HTML, CSS, JS</li>
+                            <li><i class="fas fa-check-circle"></i> Contact Form</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> Admin Dashboard</li>
+                            <li class="not-included"><i class="fas fa-times-circle"></i> SEO Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Delivery in 6 Days</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Website Design" data-plan="Standard">Get
+                            Started</button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4>Premium</h4>
+                            <div class="price">$120</div>
+                            <p>Ideal for professional brands</p>
+                            <hr>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> Up to 6 Pages</li>
+                            <li><i class="fas fa-check-circle"></i> Custom Design & Animation</li>
+                            <li><i class="fas fa-check-circle"></i> HTML, CSS, JS Integration</li>
+                            <li><i class="fas fa-check-circle"></i> Contact Form + Validation</li>
+                            <li><i class="fas fa-check-circle"></i> Admin Dashboard (Static)</li>
+                            <li><i class="fas fa-check-circle"></i> SEO Optimization</li>
+                            <li><i class="fas fa-check-circle"></i> Delivery in 7 working Days</li>
+                        </ul>
+                        <button class="pricing-btn" data-category="Website Design" data-plan="Premium">Get
+                            Started</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+
+    <!-- <section class="custom-plan-section" id="custom-plan-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-magic"></i> Design Your Perfect Plan</h2>
+                <p class="section-subtitle">Mix and match features to create a package that fits your needs</p>
+            </div>
+
+            <div class="plan-builder-container">
+                <div class="plan-category-selector glass-card">
+                    <div class="selector-header">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>1. Choose Your Category</h3>
+                    </div>
+                    <select id="category-select" class="custom-select">
+                        <option value="logo">Logo Design</option>
+                        <option value="branding">Complete Branding</option>
+                        <option value="social">Social Media Package</option>
+                        <option value="web">Website Design</option>
+                    </select>
+                </div>
+
+                <div id="custom-options" class="custom-options-grid">
+                </div>
+
+                <div id="custom-plan-card" class="custom-plan-card glass-card" style="display:none;">
+                    <div class="custom-plan-header">
+                        <h3><i class="fas fa-cube"></i> <span id="plan-category-name">Logo Design</span></h3>
+                        <div class="custom-plan-price">$<span id="total-price">0</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <ul id="custom-features-list" class="custom-features-list">
+                    </ul>
+                    <button class="custom-plan-btn pulse-on-hover">
+                        <i class="fas fa-paper-plane"></i> Get Your Custom Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+
+    <script>
+
+        document.querySelectorAll('.pricing-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const category = encodeURIComponent(button.getAttribute('data-category'));
+                const plan = encodeURIComponent(button.getAttribute('data-plan'));
+                const subject = `${category} - ${plan} Plan`;
+                const body = `Hi Themed Edits,%0A%0AI am interested in the ${plan} Plan under the ${category} category.%0A%0AI've reviewed the features and would like to proceed further. Please let me know the next steps or any additional information you may need from me to begin the process.%0A%0AThank you!`;
+
+                const email = 'themed.edits.co@gmail.com';
+                window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            });
+        });
+
+        // Complete Pricing Configuration
+        const pricingConfig = {
+            logo: {
+                name: "Logo Design",
+                basePrice: 99,
+                options: {
+                    concepts: {
+                        name: "Logo Concepts",
+                        icon: "lightbulb",
+                        type: "radio",
+                        items: [
+                            { value: 1, label: "1 Unique Concept", price: 0 },
+                            { value: 2, label: "2 Concepts (+$50)", price: 50 },
+                            { value: 3, label: "3 Concepts (+$100)", price: 100 },
+                            { value: 5, label: "5 Concepts (+$180)", price: 180 }
+                        ]
+                    },
+                    revisions: {
+                        name: "Revisions",
+                        icon: "sync-alt",
+                        type: "radio",
+                        items: [
+                            { value: 1, label: "2 Revisions", price: 0 },
+                            { value: 3, label: "4 Revisions (+$30)", price: 30 },
+                            { value: "unlimited", label: "Unlimited (+$80)", price: 80 }
+                        ]
+                    },
+                    delivery: {
+                        name: "Delivery Time",
+                        icon: "clock",
+                        type: "radio",
+                        items: [
+                            { value: "5days", label: "5 Business Days", price: 0 },
+                            { value: "3days", label: "3 Days (+$40)", price: 40 },
+                            { value: "48hr", label: "48 Hours (+$80)", price: 80 }
+                        ]
+                    },
+                    formats: {
+                        name: "File Formats",
+                        icon: "file-image",
+                        type: "checkbox",
+                        items: [
+                            { value: "png", label: "PNG (Transparent)", price: 0, default: true },
+                            { value: "jpeg", label: "JPEG (High Res)", price: 0, default: true },
+                            { value: "vector", label: "Vector Files (+$30)", price: 30 },
+                            { value: "psd", label: "PSD Source File (+$50)", price: 50 }
+                        ]
+                    },
+                    extras: {
+                        name: "Extra Services",
+                        icon: "star",
+                        type: "checkbox",
+                        items: [
+                            { value: "stationery", label: "Business Card Mockup (+$40)", price: 40 },
+                            { value: "social", label: "Social Media Kit (+$60)", price: 60 },
+                            { value: "3d", label: "3D Mockup (+$75)", price: 75 }
+                        ]
+                    }
+                }
+            },
+            branding: {
+                name: "Complete Branding",
+                basePrice: 399,
+                options: {
+                    // Similar structure with branding-specific options
+                }
+            },
+            social: {
+                name: "Social Media Package",
+                basePrice: 249,
+                options: {
+                    // Similar structure with social media options
+                }
+            },
+            web: {
+                name: "Website Design",
+                basePrice: 899,
+                options: {
+                    // Similar structure with web design options
+                }
+            }
+        };
+
+        // Initialize Plan Builder
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('category-select');
+            const optionsContainer = document.getElementById('custom-options');
+            const planCard = document.getElementById('custom-plan-card');
+            const totalPriceElement = document.getElementById('total-price');
+            const featuresList = document.getElementById('custom-features-list');
+            const planCategoryName = document.getElementById('plan-category-name');
+
+            let currentSelections = {};
+
+            // Load options when category changes
+            categorySelect.addEventListener('change', function () {
+                loadOptions(this.value);
+            });
+
+            // Initial load
+            loadOptions(categorySelect.value);
+
+            function loadOptions(category) {
+                const config = pricingConfig[category];
+                optionsContainer.innerHTML = '';
+                currentSelections = {};
+                planCategoryName.textContent = config.name;
+
+                // Create option groups
+                for (const [optionKey, optionGroup] of Object.entries(config.options)) {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'option-group';
+
+                    const groupTitle = document.createElement('h4');
+                    groupTitle.innerHTML = `<i class="fas fa-${optionGroup.icon}"></i> ${optionGroup.name}`;
+                    groupDiv.appendChild(groupTitle);
+
+                    optionGroup.items.forEach((item) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'option-item';
+
+                        const optionId = `${category}-${optionKey}-${item.value}`;
+
+                        if (optionGroup.type === 'radio') {
+                            optionDiv.innerHTML = `
+                        <label for="${optionId}">${item.label}</label>
+                        <div class="option-control">
+                            <input type="radio" 
+                                   id="${optionId}" 
+                                   name="${optionKey}" 
+                                   value="${item.value}" 
+                                   ${item.price === 0 ? 'checked' : ''}
+                                   data-price="${item.price}">
+                        </div>
+                    `;
+                        } else { // checkbox
+                            optionDiv.innerHTML = `
+                        <label for="${optionId}">${item.label}</label>
+                        <div class="option-control">
+                            <input type="checkbox" 
+                                   id="${optionId}" 
+                                   name="${optionKey}" 
+                                   value="${item.value}" 
+                                   ${item.default ? 'checked' : ''}
+                                   data-price="${item.price}">
+                        </div>
+                    `;
+                        }
+
+                        const input = optionDiv.querySelector('input');
+                        input.addEventListener('change', updatePlan);
+
+                        groupDiv.appendChild(optionDiv);
+                    });
+
+                    optionsContainer.appendChild(groupDiv);
+                }
+
+                updatePlan();
+            }
+
+            function updatePlan() {
+                const category = categorySelect.value;
+                const config = pricingConfig[category];
+                let total = config.basePrice;
+                featuresList.innerHTML = '';
+
+                // Calculate total and build features list
+                for (const [optionKey, optionGroup] of Object.entries(config.options)) {
+                    if (optionGroup.type === 'radio') {
+                        const selectedOption = document.querySelector(`input[name="${optionKey}"]:checked`);
+                        if (selectedOption) {
+                            const optionPrice = parseFloat(selectedOption.dataset.price);
+                            total += optionPrice;
+
+                            const optionConfig = optionGroup.items.find(
+                                opt => opt.value === selectedOption.value
+                            );
+
+                            if (optionConfig) {
+                                addFeatureToList(optionConfig.label.replace(/\(\+\$\d+\)/, ''));
+                            }
+                        }
+                    } else { // checkbox
+                        const checkedOptions = document.querySelectorAll(`input[name="${optionKey}"]:checked`);
+                        checkedOptions.forEach(option => {
+                            const optionPrice = parseFloat(option.dataset.price);
+                            total += optionPrice;
+
+                            const optionConfig = optionGroup.items.find(
+                                opt => opt.value === option.value
+                            );
+
+                            if (optionConfig && optionPrice > 0) {
+                                addFeatureToList(optionConfig.label.replace(/\(\+\$\d+\)/, ''));
+                            }
+                        });
+                    }
+                }
+
+                // Update UI
+                totalPriceElement.textContent = total;
+                planCard.style.display = 'block';
+
+                // Add base feature
+                addFeatureToList(`${config.name} Package`, true);
+            }
+
+            function addFeatureToList(feature, isBase = false) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<i class="fas fa-${isBase ? 'cube' : 'check-circle'}"></i> ${feature}`;
+                if (isBase) {
+                    featuresList.prepend(listItem);
+                } else {
+                    featuresList.appendChild(listItem);
+                }
+            }
+        });
+
+
+
+        // FadeInUp animations goes here //
+        document.addEventListener('DOMContentLoaded', function () {
+            const divs = document.querySelectorAll('.pricing-card');
+
+            divs.forEach(div => {
+                div.classList.add('reveal');
+            });
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // If the element is a value-item, apply staggered delays to all its siblings
+                        if (entry.target.classList.contains('value-item')) {
+                            const siblings = entry.target.parentElement.querySelectorAll('.value-item');
+                            siblings.forEach((sibling, index) => {
+                                sibling.style.transitionDelay = `${index * 0.3}s`; // Animation delay
+                                sibling.classList.add('active');
+                            });
+                        } else {
+                            // Normal behavior for other divs
+                            entry.target.classList.add('active');
+                        }
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, {
+                threshold: 0.3 // 10% of element visible triggers animation
+            });
+
+            divs.forEach(div => {
+                observer.observe(div);
+            });
+        });
+
+
+
+
+
+
+         // back to top button goes here //
+         document.addEventListener('DOMContentLoaded', function () {
+            const backToTop = document.getElementById('backToTop');
+            const progressCircle = document.querySelector('.progress-ring-circle');
+            const circumferenceDesktop = 2 * Math.PI * 22;  // Desktop circle radius
+            const circumferenceMobile = 2 * Math.PI * 20;   // Mobile circle radius
+
+            function updateProgress() {
+                const isMobile = window.innerWidth <= 768;
+                const radius = isMobile ? 20 : 22; // Mobile vs Desktop radius
+                const circumference = isMobile ? circumferenceMobile : circumferenceDesktop;
+
+                // Set circle stroke values
+                progressCircle.style.strokeDasharray = circumference;
+                progressCircle.style.strokeDashoffset = circumference;
+
+                const scrollTop = window.scrollY;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollProgress = scrollTop / scrollHeight;
+                const offset = circumference * (1 - Math.min(scrollProgress, 1));
+
+                progressCircle.style.strokeDashoffset = offset;
+
+                // Show or hide the button
+                if (scrollTop > 50) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+
+            // Update progress on scroll
+            window.addEventListener('scroll', updateProgress);
+
+            // Update progress on window resize (for responsive adjustments)
+            window.addEventListener('resize', updateProgress);
+
+            // Initial call to set progress
+            updateProgress();
+
+            // Smooth scroll to top when clicked
+            backToTop.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

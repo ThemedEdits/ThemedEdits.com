@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="my logo-01 copy.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Themed Edits | Services</title>
+    <style>
+        :root {
+            --primary-color: #7b9aff;
+            /* lighter shade of your original primary to pop on dark bg */
+            --primary-dark: #5c78e0;
+            /* softer dark primary */
+            --secondary-color: #6372f7;
+            /* slightly lighter secondary for contrast */
+            --text-color: #e0e0e0;
+            /* light text for readability */
+            --text-light: #b0b3c5;
+            /* softer secondary text */
+            --background-color: #1a1c2c;
+            /* deep dark background */
+            --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            /* subtle light shadow for dark bg */
+            --hover-shadow: 0 6px 12px rgba(123, 154, 255, 0.3);
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 6rem 2rem;
+            background-color: var(--background-color);
+            position: relative;
+        }
+
+        .services-section .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+        }
+
+        .services-section .section-header h2 i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--background-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--hover-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .service-thumbnail {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-content p {
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .service-features li i {
+            color: var(--primary-color);
+            margin-top: 3px;
+            font-size: 0.9rem;
+        }
+
+        .service-cta {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .service-cta::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease, transform-origin 0s;
+        }
+
+        .service-cta:hover {
+            color: var(--primary-dark);
+        }
+
+        .service-cta:hover::after {
+            transform: scaleX(1);
+            transform-origin: right;
+        }
+
+        /* When not hovering (important for the reverse effect) */
+        .service-cta::after {
+            transition: transform 0.4s ease, transform-origin 0s 0.4s;
+            /* delay changing origin */
+        }
+
+        .service-cta:not(:hover)::after {
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+
+
+        .service-cta i {
+            transition: var(--transition);
+        }
+
+        .service-cta:hover i {
+            transform: translateX(10px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .service-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .service-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .service-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .service-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .service-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        /* Home Button Styles */
+        .home-btn-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .home-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+            background: var(--background-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+        }
+
+        .home-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease, transform-origin 0s;
+        }
+
+        .home-btn:hover {
+            color: var(--primary-dark);
+        }
+
+        .home-btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: right;
+        }
+
+        /* Reverse animation when not hovering */
+        .home-btn::after {
+            transition: transform 0.4s ease, transform-origin 0s 0.4s;
+        }
+
+        .home-btn:not(:hover)::after {
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .home-btn i {
+            transition: var(--transition);
+        }
+
+        .home-btn:hover i {
+            transform: translateX(-10px);
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 768px) {
+            .home-btn-container {
+                top: 15px;
+                left: 15px;
+            }
+
+            .home-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .services-section {
+                padding: 5rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .services-section .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-thumbnail {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .services-section {
+                padding: 6rem 1.3rem;
+            }
+
+            .service-content {
+                padding: 1.2rem;
+            }
+
+            .service-thumbnail {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="home-btn-container">
+        <a href="../index.html" class="home-btn">
+            <i class="fas fa-arrow-left"></i> Return to Home
+        </a>
+        
+    </div>
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-handshake-angle"></i> Our Services</h2>
+                <p class="section-subtitle">Comprehensive solutions tailored to your brand</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Brand Identity -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="service-thumbnail">
+                        <img src="brand.png" alt="Brand Identity Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>Brand Identity</h3>
+                        <p>We craft unique visual identities that communicate your brand's essence. Our comprehensive
+                            package includes:</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Logo design & variations</li>
+                            <li><i class="fas fa-check"></i> Color palette development</li>
+                            <li><i class="fas fa-check"></i> Typography system</li>
+                            <li><i class="fas fa-check"></i> Brand guidelines</li>
+                            <li><i class="fas fa-check"></i> Stationery design</li>
+                            <li><i class="fas fa-check"></i> Mockup designs</li>
+                            <li><i class="fas fa-check"></i> Business card designs</li>
+                            <li><i class="fas fa-check"></i> Letterhead designs</li>
+                        </ul>
+                        <a href="/portfolio/portfolio.html" class="service-cta">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Logo Design -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <div class="service-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1468&q=80"
+                            alt="Logo Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>Logo Design</h3>
+                        <p>Memorable logos that stand the test of time. Our process includes:</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Industry research</li>
+                            <li><i class="fas fa-check"></i> Conceptual sketching</li>
+                            <li><i class="fas fa-check"></i> Multiple design options</li>
+                            <li><i class="fas fa-check"></i> Revisions & refinements</li>
+                            <li><i class="fas fa-check"></i> Final file delivery</li>
+                            <li><i class="fas fa-check"></i> Source file</li>
+                            <li><i class="fas fa-check"></i> Fast delivery</li>
+                        </ul>
+                        <a href="/portfolio/portfolio.html" class="service-cta">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <div class="service-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                            alt="Social Media Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>Social Media Design</h3>
+                        <p>Scroll-stopping content for all platforms. We create:</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Platform-specific templates</li>
+                            <li><i class="fas fa-check"></i> Campaign visuals</li>
+                            <li><i class="fas fa-check"></i> Story & reel content</li>
+                            <li><i class="fas fa-check"></i> Animated posts</li>
+                            <li><i class="fas fa-check"></i> Content calendars</li>
+                            <li><i class="fas fa-check"></i> Online posting</li>
+                            <li><i class="fas fa-check"></i> Daily basis service</li>
+                        </ul>
+                        <a href="/portfolio/portfolio.html" class="service-cta">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Web Design -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="service-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+                            alt="Web Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>Web Design</h3>
+                        <p>Beautiful, functional websites that convert visitors. Our approach includes:</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> UX/UI design</li>
+                            <li><i class="fas fa-check"></i> Custom homepage & inner pages design</li>
+                            <li><i class="fas fa-check"></i> Responsive layouts</li>
+                            <li><i class="fas fa-check"></i> Prototyping</li>
+                            <li><i class="fas fa-check"></i> CMS integration</li>
+                            <li><i class="fas fa-check"></i> Contact forms</li>
+                            <li><i class="fas fa-check"></i> Performance optimization</li>
+                            <li><i class="fas fa-check"></i> Image sliders or carousels</li>
+                            <li><i class="fas fa-check"></i> Google Maps integration</li>
+                            <li><i class="fas fa-check"></i> Admin dashboard UI</li>
+                            <li><i class="fas fa-check"></i> Multi-language layout (i18n ready)</li>
+                        </ul>
+                        <a href="/portfolio/portfolio.html" class="service-cta">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Development -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="service-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Web Development">
+                    </div>
+                    <div class="service-content">
+                        <h3>Web Development</h3>
+                        <p>Robust technical solutions built to last. Our development services include:</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Front-end development</li>
+                            <li><i class="fas fa-check"></i> Back-end systems</li>
+                            <li><i class="fas fa-check"></i> JavaScript interactivity</li>
+                            <li><i class="fas fa-check"></i> E-commerce solutions</li>
+                            <li><i class="fas fa-check"></i> API integrations</li>
+                            <li><i class="fas fa-check"></i> Form validation (client-side)</li>
+                            <li><i class="fas fa-check"></i> Ongoing maintenance</li>
+                            <li><i class="fas fa-check"></i> Database integration</li>
+                            <li><i class="fas fa-check"></i> Search/filter systems</li>
+                            <li><i class="fas fa-check"></i> User profile management</li>
+                            <li><i class="fas fa-check"></i> Domain connection</li>
+                            <li><i class="fas fa-check"></i> Hosting setup and deployment</li>
+                        </ul>
+                        <a href="/portfolio/portfolio.html" class="service-cta">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- App Design -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="service-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="App Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>App Design</h3>
+                        <p>Intuitive mobile experiences users love. We deliver:</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> User research</li>
+                            <li><i class="fas fa-check"></i> Custom app screen designs</li>
+                            <li><i class="fas fa-check"></i> Dark mode / light mode options</li>
+                            <li><i class="fas fa-check"></i> App branding assets</li>
+                            <li><i class="fas fa-check"></i> Web app (PWA) UI design</li>
+                            <li><i class="fas fa-check"></i> Design handoff support</li>
+                            <li><i class="fas fa-check"></i> Wireframing</li>
+                            <li><i class="fas fa-check"></i> Interactive prototypes</li>
+                            <li><i class="fas fa-check"></i> UI design systems</li>
+                            <li><i class="fas fa-check"></i> Developer handoff</li>
+                            <li><i class="fas fa-check"></i> Redesign of existing app interface</li>
+                            <li><i class="fas fa-check"></i> App store preview graphics</li>
+                        </ul>
+                        <a href="/portfolio/portfolio.html" class="service-cta">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
